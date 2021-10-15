@@ -7,7 +7,7 @@
     "build": "next build",
     "start": "next start",
     "lint": "next lint",
-    "changelog": "auto-changelog -p && git add CHANGELOG.md"
+    "changelog": "auto-changelog --sort-commits=date --commit-limit=false -p && git add CHANGELOG.md"
   },
   "dependencies": {
     "@types/styled-components": "^5.1.15",
