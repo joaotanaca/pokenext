@@ -19,7 +19,10 @@
             "@molecules/*": ["./src/components/molecules/*"],
             "@organisms/*": ["./src/components/organisms/*"],
             "@styles/*": ["./src/styles/*"],
-            "@lib/*": ["./src/lib/*"]
+            "@lib/*": ["./src/lib/*"],
+            "@context/*": ["./src/context/*"],
+            "@hooks/*": ["./src/hooks/*"],
+            "@interfaces/*": ["./src/interfaces/*"]
         }
     },
     "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx"],

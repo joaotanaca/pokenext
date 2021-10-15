@@ -1,4 +1,4 @@
-const theme = {
+const typeColors = {
     rock: "#B69E31",
     ghost: "#70559B",
     steel: "#B7B9D0",
@@ -17,6 +17,9 @@ const theme = {
     fire: "#F57D31",
     eletric: "#F9CF30",
     dragon: "#7037FF",
+};
+const theme = {
+    ...typeColors,
     darkGray: "#212121",
     mediumGray: "#666666",
     lightGray: "#E0E0E0",
@@ -25,5 +28,7 @@ const theme = {
 };
 
 export type Theme = typeof theme;
+
+export type PokemonColors = typeof typeColors;
 
 export default theme;
