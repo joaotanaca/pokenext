@@ -13,7 +13,7 @@ const Icon: React.FC<TProps> = ({
     ...props
 }) => {
     const Component = useMemo(() => source[name], [name]);
-    return <Component size={size} {...props} />;
+    return <Component size={size} color={color} {...props} />;
 };
 
 export default Icon;
