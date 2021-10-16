@@ -1,4 +1,5 @@
-import React, { useCallback, useEffect, useMemo, useState } from "react";
+/* eslint-disable react-hooks/exhaustive-deps */
+import React, { useCallback, useMemo, useState } from "react";
 import { TPokemon } from "@interfaces/pokemon";
 import Card from "@molecules/Card";
 import Searchbar from "@molecules/Searchbar";
@@ -16,8 +17,9 @@ const Cards: React.FC<TProps> = ({ items, pages, allPokemons }) => {
     const [pokemons, setPokemons] = useState(items);
     const [loading, setLoading] = useState(false);
     const [search, setSearch] = useState("");
-    const [_sort, setSort] = useState<"high" | "low">("low");
+    const [_sort, setSort] = useState<"high" | "low">("high");
     const [page, setPage] = useState(1);
+    let timeout: any = null;
 
     const morePokemons = useCallback(async () => {
         setLoading(true);
@@ -27,13 +29,29 @@ const Cards: React.FC<TProps> = ({ items, pages, allPokemons }) => {
         setLoading(false);
     }, [page]);
 
+    const handleSearchChange = useCallback(
+        (event: React.ChangeEvent<HTMLInputElement>) => {
+            if (timeout) clearTimeout(timeout);
+            timeout = setTimeout(() => {
+                setSearch(event.target.value);
+            }, 500);
+        },
+        [timeout],
+    );
+
+    const handleSort = useCallback(() => {
+        setSort((prev) => (prev === "high" ? "low" : "high"));
+    }, []);
+
     const handleSortNumbers = useCallback(
         (a: TPokemon, b: TPokemon) => {
             if (_sort === "low") {
+                // debaixo pra cima
                 if (Number(a.num) < Number(b.num)) return 1;
 
                 if (Number(a.num) > Number(b.num)) return -1;
             } else {
+                // cima pra debaixo
                 if (Number(a.num) > Number(b.num)) return 1;
 
                 if (Number(a.num) < Number(b.num)) return -1;
@@ -78,7 +96,10 @@ const Cards: React.FC<TProps> = ({ items, pages, allPokemons }) => {
 
     return (
         <div className="grid grid-cols-12 gap-4 md:gap-4 px-4 md:px-6 xl:px-12 my-4">
-            <Searchbar />
+            <Searchbar
+                handleSearchChange={handleSearchChange}
+                handleSort={handleSort}
+            />
             {renderCards}
             {!search && (
                 <div className="col-span-12 flex justify-center">
