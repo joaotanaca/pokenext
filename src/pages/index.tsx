@@ -11,7 +11,11 @@ type THomeProps = {
 const Home: NextPage<THomeProps> = ({ response }) => {
     return (
         <div className="container mx-auto">
-            <Cards items={response.pokemons} pages={response.pages} />
+            <Cards
+                items={response.pokemons}
+                pages={response.pages}
+                allPokemons={response.allPokemons}
+            />
         </div>
     );
 };
