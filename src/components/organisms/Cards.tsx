@@ -100,7 +100,11 @@ const Cards: React.FC<TProps> = ({ items, pages, allPokemons }) => {
                 handleSearchChange={handleSearchChange}
                 handleSort={handleSort}
             />
-            {renderCards}
+            {!renderCards.filter((card) => card !== null).length ? (
+                <p className="col-span-12 text-center">Parece que não encontramos o que você procurava!</p>
+            ) : (
+                renderCards
+            )}
             {!search && (
                 <div className="col-span-12 flex justify-center">
                     {page === pages ? (
