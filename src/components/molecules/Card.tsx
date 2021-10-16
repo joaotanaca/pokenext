@@ -3,6 +3,7 @@ import styled from "styled-components";
 import Image from "next/image";
 import { TPokemon } from "@interfaces/pokemon";
 import { PokemonColors } from "@styles/theme";
+import useMobile from "@hooks/useMobile";
 
 type TContainerProps = {
     pokemonColor: PokemonColors;
@@ -25,10 +26,12 @@ const CardContainer = styled.div.attrs({
 `;
 
 const Card: React.FC<TProps> = ({ pokemon }) => {
+    const mobile = useMobile();
     return (
         <CardContainer pokemonColor={pokemon.type[0]}>
             <p className="text-right px-2 w-full">#{pokemon.num}</p>
             <Image
+                quality={mobile ? "50" : "100"}
                 src={pokemon.img}
                 alt={pokemon.name}
                 width="100%"
