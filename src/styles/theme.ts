@@ -1,22 +1,22 @@
 const typeColors = {
-    rock: "#B69E31",
-    ghost: "#70559B",
-    steel: "#B7B9D0",
-    water: "#6493EB",
-    grass: "#74CB48",
-    psychic: "#FB5584",
-    ice: "#9AD6DF",
-    dark: "#75574C",
-    fairy: "#E69EAC",
-    normal: "#AAA67F",
-    fighting: "#C12239",
-    flying: "#A891EC",
-    poison: "#A43E9E",
-    ground: "#DEC16B",
-    bug: "#A7B723",
-    fire: "#F57D31",
-    eletric: "#F9CF30",
-    dragon: "#7037FF",
+    Rock: "#B69E31",
+    Ghost: "#70559B",
+    Steel: "#B7B9D0",
+    Water: "#6493EB",
+    Grass: "#74CB48",
+    Psychic: "#FB5584",
+    Ice: "#9AD6DF",
+    Dark: "#75574C",
+    Fairy: "#E69EAC",
+    Normal: "#AAA67F",
+    Fighting: "#C12239",
+    Flying: "#A891EC",
+    Poison: "#A43E9E",
+    Ground: "#DEC16B",
+    Bug: "#A7B723",
+    Fire: "#F57D31",
+    Electric: "#F9CF30",
+    Dragon: "#7037FF",
 };
 const theme = {
     ...typeColors,
@@ -29,6 +29,6 @@ const theme = {
 
 export type Theme = typeof theme;
 
-export type PokemonColors = typeof typeColors;
+export type PokemonColors = keyof typeof typeColors;
 
 export default theme;

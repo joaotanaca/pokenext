@@ -1,9 +1,11 @@
+import { PokemonColors } from "@styles/theme";
+
 export type TPokemon = {
     id: number;
     num: string;
     name: string;
     img: string;
-    type: string[];
+    type: PokemonColors[];
     height: string;
     weight: string;
     candy: string;
