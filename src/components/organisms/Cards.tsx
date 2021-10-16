@@ -12,8 +12,9 @@ type TProps = {
 
 const Cards: React.FC<TProps> = ({ items }) => {
     const [pokemons, setPokemons] = useState(items);
-    const [page, setPage] = useState(2);
     const [loading, setLoading] = useState(false);
+    const [search, setSearch] = useState("");
+    const [page, setPage] = useState(2);
 
     const morePokemons = useCallback(async () => {
         setLoading(true);
