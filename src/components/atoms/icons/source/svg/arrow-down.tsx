@@ -3,6 +3,7 @@ import { TIcon } from "..";
 
 const arrowDown: React.FC<TIcon> = ({ size, color, ...props }) => (
     <svg
+        {...props}
         width={size}
         height={size && size * 1.6}
         viewBox="0 0 10 16"

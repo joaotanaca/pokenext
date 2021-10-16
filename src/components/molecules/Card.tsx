@@ -14,7 +14,7 @@ type TProps = {
 
 const CardContainer = styled.div.attrs({
     className:
-        "flex flex-col rounded-lg pt-1 col-span-6 md:col-span-4 xl:col-span-3 items-center box-border",
+        "flex flex-col rounded-lg pt-1 col-span-6 sm:col-span-4 lg:col-span-3 xl:col-span-2 items-center box-border",
 })<TContainerProps>`
     border: 2px solid ${({ pokemonColor, theme }) => theme[pokemonColor]};
     color: ${({ pokemonColor, theme }) => theme[pokemonColor]};
