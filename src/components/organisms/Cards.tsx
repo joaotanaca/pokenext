@@ -1,7 +1,7 @@
+import React, { useMemo } from "react";
 import { TPokemon } from "@interfaces/pokemon";
 import Card from "@molecules/Card";
 import Searchbar from "@molecules/Searchbar";
-import React, { useMemo } from "react";
 
 type TProps = {
     pokemons: TPokemon[];
