@@ -35,7 +35,7 @@ const Card: React.FC<TProps> = ({ pokemon }) => {
                 height="100%"
                 layout="fixed"
             />
-            <div className="pokemon-name py-1 px-2 text-md md:text-xl rounded-b-lg text-center w-full">
+            <div className="pokemon-name py-1 px-2 text-md md:text-xl text-center w-full">
                 {pokemon.name}
             </div>
         </CardContainer>
