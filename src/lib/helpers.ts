@@ -15,7 +15,7 @@ export async function getPokemons(page = 1, size = 30): Promise<TResponse> {
     const init = size * (page - 1);
     const breakPoint = size * page;
     let pokemonsPaginated = [];
-    
+
     for (let index = init; index < pokemons.length; index++) {
         if (index >= breakPoint) break;
         const pokemon = pokemons[index];
@@ -26,6 +26,6 @@ export async function getPokemons(page = 1, size = 30): Promise<TResponse> {
         allPokemons: pokemons,
         pokemons: pokemonsPaginated,
         page,
-        pages: pokemons.length / size,
+        pages: Math.ceil(pokemons.length / size),
     };
 }

@@ -11,15 +11,15 @@ type TProps = {
     pages: number;
 };
 
-const Cards: React.FC<TProps> = ({ items }) => {
+const Cards: React.FC<TProps> = ({ items, pages }) => {
     const [pokemons, setPokemons] = useState(items);
     const [loading, setLoading] = useState(false);
     const [search, setSearch] = useState("");
-    const [page, setPage] = useState(2);
+    const [page, setPage] = useState(1);
 
     const morePokemons = useCallback(async () => {
         setLoading(true);
-        const { pokemons } = await getPokemons(page);
+        const { pokemons } = await getPokemons(page + 1);
         setPokemons((prev) => [...prev, ...pokemons]);
         setPage(page + 1);
         setLoading(false);
@@ -38,12 +38,22 @@ const Cards: React.FC<TProps> = ({ items }) => {
             <Searchbar />
             {renderCards}
             <div className="col-span-12 flex justify-center">
-                <Button className="flex justify-center w-full" onClick={morePokemons}>
-                    Mais pokemons{" "}
-                    {loading && (
-                        <Icon name="pokeball" className="animate-spin ml-2" />
-                    )}
-                </Button>
+                {page === pages ? (
+                    <p>Parece que chegou ao final da pokedex!</p>
+                ) : (
+                    <Button
+                        className="flex justify-center w-full"
+                        onClick={morePokemons}
+                    >
+                        Mais pokemons{" "}
+                        {loading && (
+                            <Icon
+                                name="pokeball"
+                                className="animate-spin ml-2"
+                            />
+                        )}
+                    </Button>
+                )}
             </div>
         </div>
     );
