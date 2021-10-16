@@ -1,26 +1,24 @@
 /* eslint-disable react-hooks/rules-of-hooks */
 import type { NextPage } from "next";
-import { getPokemons } from "@lib/helpers";
+import { getPokemons, TResponse } from "@lib/helpers";
 import { TPokemon } from "@interfaces/pokemon";
-import Card from "@molecules/Card";
-import { useMemo } from "react";
 import Cards from "src/components/organisms/Cards";
 
 type THomeProps = {
-    pokemons: TPokemon[];
+    response: TResponse;
 };
 
-const Home: NextPage<THomeProps> = ({ pokemons }) => {
+const Home: NextPage<THomeProps> = ({ response }) => {
     return (
         <div className="container mx-auto">
-            <Cards pokemons={pokemons} />
+            <Cards items={response.pokemons} pages={response.pages} />
         </div>
     );
 };
 
 export async function getStaticProps() {
-    const pokemons = await getPokemons();
-    return { props: { pokemons }, revalidate: 1 };
+    const response = await getPokemons();
+    return { props: { response }, revalidate: 1 };
 }
 
 export default Home;
