@@ -63,23 +63,21 @@ const Cards: React.FC<TProps> = ({ items, pages, allPokemons }) => {
     );
 
     const handleFilterPokemons = useCallback(
-        (pokemon: TPokemon) => {
-            if (
-                pokemon.name.toLowerCase().includes(search) ||
-                pokemon.num.toLowerCase().includes(search)
-            ) {
-                return <Card key={pokemon.id} pokemon={pokemon} />;
-            } else {
-                return null;
-            }
-        },
+        (pokemon: TPokemon) =>
+            pokemon.name.toLowerCase().includes(search) ||
+            pokemon.num.toLowerCase().includes(search),
         [search],
     );
 
     const renderCards = useMemo(
         () =>
             search
-                ? allPokemons?.sort(handleSortNumbers).map(handleFilterPokemons)
+                ? allPokemons
+                      ?.sort(handleSortNumbers)
+                      .filter(handleFilterPokemons)
+                      .map((pokemon) => (
+                          <Card key={pokemon.id} pokemon={pokemon} />
+                      ))
                 : pokemons
                       ?.sort(handleSortNumbers)
                       .map((pokemon) => (
@@ -100,8 +98,10 @@ const Cards: React.FC<TProps> = ({ items, pages, allPokemons }) => {
                 handleSearchChange={handleSearchChange}
                 handleSort={handleSort}
             />
-            {!renderCards.filter((card) => card !== null).length ? (
-                <p className="col-span-12 text-center">Parece que não encontramos o que você procurava!</p>
+            {!renderCards.length ? (
+                <p className="col-span-12 text-center">
+                    Parece que não encontramos o que você procurava!
+                </p>
             ) : (
                 renderCards
             )}
