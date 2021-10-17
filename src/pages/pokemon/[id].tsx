@@ -2,6 +2,7 @@ import React from "react";
 import { GetStaticPropsContext } from "next";
 import { getPokemon, getPokemons } from "@lib/helpers";
 import { TPokemon } from "@interfaces/pokemon";
+import { useFetch } from "@hooks/useFetch";
 
 type TProps = {
     pokemon: TPokemon;
@@ -9,9 +10,10 @@ type TProps = {
 };
 
 const Pokemon: React.FC<TProps> = ({ pokemon, id }) => {
+    const { data = pokemon } = useFetch<TPokemon>(`/api/pokemons/${id}`);
     return (
         <>
-            {pokemon.name}
+            {data.name}
             {id}
         </>
     );
