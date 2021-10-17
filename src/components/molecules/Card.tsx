@@ -1,12 +1,10 @@
 import React, { useState } from "react";
 import styled from "styled-components";
-import Image from "next/image";
 import Link from "next/link";
 
 import { TPokemon } from "@interfaces/pokemon";
 import { PokemonColors } from "@styles/theme";
-import useMobile from "@hooks/useMobile";
-import Loader from "@atoms/Loader";
+import Image from "@atoms/Image";
 
 type TContainerProps = {
     pokemonColor: PokemonColors;
@@ -29,23 +27,12 @@ const CardContainer = styled.a.attrs({
 `;
 
 const Card: React.FC<TProps> = ({ pokemon }) => {
-    const [loading, setLoading] = useState(true);
-    const mobile = useMobile();
     return (
         <Link href={`/pokemon/${pokemon.id}`} passHref>
             <CardContainer pokemonColor={pokemon.type[0]}>
                 <p className="text-right px-2 w-full">#{pokemon.num}</p>
-                <div className="w-full h-36 relative">
-                    {loading && <Loader />}
-                    <Image
-                        quality={mobile ? "50" : "90"}
-                        loading="lazy"
-                        src={pokemon.img}
-                        alt={pokemon.name}
-                        layout="fill"
-                        objectFit={mobile ? "contain" : "scale-down"}
-                        onLoadingComplete={() => setLoading(false)}
-                    />
+                <div className="w-full h-36">
+                    <Image img={pokemon.img} alt={pokemon.name} />
                 </div>
                 <div className="pokemon-name py-1 px-2 text-md md:text-xl text-center w-full">
                     {pokemon.name}

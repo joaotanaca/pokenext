@@ -29,22 +29,3 @@ export async function getPokemons(page = 1, size = 30): Promise<TResponse> {
         pages: Math.ceil(pokemons.length / size),
     };
 }
-
-export async function getPokemon(id: number): Promise<TPokemon> {
-    const { pokemon } = await fetch(
-        "https://raw.githubusercontent.com/Biuni/PokemonGO-Pokedex/master/pokedex.json",
-    ).then((r) => r.json());
-    
-    const base: TPokemon = pokemon[id - 1];
-    
-    const evolutions =
-        base.next_evolution?.map((evolution) => {
-            const { id, num, img, name }: TPokemon =
-                pokemon[Number(evolution.num) - 1];
-
-            return { id, num, img, name };
-        }) || null;
-
-    base.next_evolution = evolutions;
-    return base;
-}
