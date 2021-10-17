@@ -29,3 +29,10 @@ export async function getPokemons(page = 1, size = 30): Promise<TResponse> {
         pages: Math.ceil(pokemons.length / size),
     };
 }
+
+export async function getPokemon(id: number): Promise<TPokemon> {
+    const { pokemon } = await fetch(
+        "https://raw.githubusercontent.com/Biuni/PokemonGO-Pokedex/master/pokedex.json",
+    ).then((r) => r.json());
+    return pokemon[id - 1];
+}
