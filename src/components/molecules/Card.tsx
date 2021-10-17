@@ -14,7 +14,7 @@ type TProps = {
     pokemon: TPokemon;
 };
 
-const CardContainer = styled.a.attrs({
+const CardContainer = styled.div.attrs({
     className:
         "flex flex-col rounded-lg pt-1 col-span-6 sm:col-span-4 lg:col-span-3 xl:col-span-2 items-center box-border",
 })<TContainerProps>`
@@ -28,17 +28,15 @@ const CardContainer = styled.a.attrs({
 
 const Card: React.FC<TProps> = ({ pokemon }) => {
     return (
-        <Link href={`/pokemon/${pokemon.id}`} passHref>
-            <CardContainer pokemonColor={pokemon.type[0]}>
-                <p className="text-right px-2 w-full">#{pokemon.num}</p>
-                <div className="w-full h-36">
-                    <Image img={pokemon.img} alt={pokemon.name} />
-                </div>
-                <div className="pokemon-name py-1 px-2 text-md md:text-xl text-center w-full">
-                    {pokemon.name}
-                </div>
-            </CardContainer>
-        </Link>
+        <CardContainer pokemonColor={pokemon.type[0]}>
+            <p className="text-right px-2 w-full">#{pokemon.num}</p>
+            <div className="w-full h-36">
+                <Image img={pokemon.img} alt={pokemon.name} />
+            </div>
+            <div className="pokemon-name py-1 px-2 text-md md:text-xl text-center w-full">
+                {pokemon.name}
+            </div>
+        </CardContainer>
     );
 };
 
