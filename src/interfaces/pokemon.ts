@@ -15,7 +15,7 @@ export type TPokemon = {
     avg_spawns: number;
     spawn_time: string;
     multipliers: number[];
-    weaknesses: string[];
+    weaknesses: PokemonColors[];
     next_evolution: {
         num: string;
         name: string;

@@ -6,6 +6,8 @@ import Searchbar from "@molecules/Searchbar";
 import { getPokemons } from "@lib/helpers";
 import Icon from "@atoms/icons";
 import Button from "@atoms/Button";
+import { AnimatePresence, AnimateSharedLayout } from "framer-motion";
+import ModalPokemon from "@molecules/ModalPokemon";
 
 type TProps = {
     items: TPokemon[];
@@ -19,6 +21,7 @@ const Cards: React.FC<TProps> = ({ items, pages, allPokemons }) => {
     const [search, setSearch] = useState("");
     const [_sort, setSort] = useState<"high" | "low">("high");
     const [page, setPage] = useState(1);
+    const [selectedPokemon, setSelectedPokemon] = useState<number | null>(null);
     let timeout: any = null;
 
     const morePokemons = useCallback(async () => {
@@ -69,6 +72,11 @@ const Cards: React.FC<TProps> = ({ items, pages, allPokemons }) => {
         [search],
     );
 
+    const handleToogleModal = useCallback(
+        (id = null) => setSelectedPokemon(id),
+        [],
+    );
+
     const renderCards = useMemo(
         () =>
             search
@@ -76,12 +84,20 @@ const Cards: React.FC<TProps> = ({ items, pages, allPokemons }) => {
                       ?.sort(handleSortNumbers)
                       .filter(handleFilterPokemons)
                       .map((pokemon) => (
-                          <Card key={pokemon.id} pokemon={pokemon} />
+                          <Card
+                              onOpen={handleToogleModal}
+                              key={pokemon.id}
+                              pokemon={pokemon}
+                          />
                       ))
                 : pokemons
                       ?.sort(handleSortNumbers)
                       .map((pokemon) => (
-                          <Card key={pokemon.id} pokemon={pokemon} />
+                          <Card
+                              onOpen={handleToogleModal}
+                              key={pokemon.id}
+                              pokemon={pokemon}
+                          />
                       )),
         [
             allPokemons,
@@ -103,7 +119,17 @@ const Cards: React.FC<TProps> = ({ items, pages, allPokemons }) => {
                     Parece que não encontramos o que você procurava!
                 </p>
             ) : (
-                renderCards
+                <AnimateSharedLayout type="crossfade">
+                    {renderCards}
+                    <AnimatePresence>
+                        {selectedPokemon && (
+                            <ModalPokemon
+                                onClose={handleToogleModal}
+                                pokemon={allPokemons[selectedPokemon - 1]}
+                            />
+                        )}
+                    </AnimatePresence>
+                </AnimateSharedLayout>
             )}
             {!search && (
                 <div className="col-span-12 flex justify-center">

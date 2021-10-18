@@ -7,7 +7,7 @@ type TProps = {
 };
 
 const BadgeContainer = styled.div.attrs({
-    className: "px-2 py-1 rounded-3xl font-bold",
+    className: "px-3 py-1 rounded-3xl font-normal",
 })<TProps>`
     background-color: ${({ theme, type }) => theme[type]};
     color: ${({ theme }) => theme.white};

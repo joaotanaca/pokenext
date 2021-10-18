@@ -8,6 +8,7 @@ type ObjectFit = NonNullable<
 >["objectFit"];
 
 type TProps = {
+    className?: string;
     img: string;
     alt: string;
     quality?: { mobile?: string; desktop?: string };
@@ -18,6 +19,7 @@ type TProps = {
 };
 
 const Image: React.FC<TProps> = ({
+    className = "",
     img,
     alt,
     quality = { mobile: "50", desktop: "90" },
@@ -26,7 +28,7 @@ const Image: React.FC<TProps> = ({
     const [loading, setLoading] = useState(true);
     const mobile = useMobile();
     return (
-        <div className="w-full h-full relative">
+        <div className={`w-full h-full relative ${className}`}>
             {loading && <Loader />}
             <NextImage
                 quality={mobile ? quality.mobile : quality.desktop}
